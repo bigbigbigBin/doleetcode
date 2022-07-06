@@ -1,29 +1,21 @@
-package array;
+package special.BinarySearch;
 
-public class BinarySearch {
+public class IntNumBinarySearch {
     /**
+     * 题目链接：https://leetcode-cn.com/problems/binary-search/
+     *
      * 给定一个n个元素有序的（升序）整型数组nums 和一个目标值target，
      * 写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。
      *
      */
 
-    public int searchRecursive(int [] nums, int target) {
-        // 递归版本
-        return binarySearch(nums, target, 0, nums.length-1);
-    }
-
-
-//    int[] nums = {-1,0,3,5,9,12};
-//    int target = 9;
     // 非递归版本
     public int searchNotRecursive(int [] nums, int target) {
         int lIndex = 0, rIndex = nums.length-1;
         int midIndex;
 
         while (lIndex <= rIndex) {
-            System.out.println("lIndex = " + lIndex + ", rIndex = " + rIndex);
             midIndex = (rIndex - lIndex) / 2 + lIndex;
-            System.out.println("midIndex = " + midIndex);
             if (nums[midIndex] == target) {
                 return midIndex;
             } else if (nums[midIndex] < target) {
@@ -32,8 +24,13 @@ public class BinarySearch {
                 rIndex = midIndex -1;
             }
         }
-        System.out.println("lIndex = " + lIndex + ", rIndex = " + rIndex);
         return -1;
+    }
+
+
+    public int searchRecursive(int [] nums, int target) {
+        // 递归版本
+        return binarySearch(nums, target, 0, nums.length-1);
     }
 
     /**
@@ -87,7 +84,7 @@ public class BinarySearch {
 //        int[] nums = {5};
 //        int target = 5;
 
-        BinarySearch binarySearch = new BinarySearch();
+        IntNumBinarySearch binarySearch = new IntNumBinarySearch();
         System.out.println(binarySearch.searchNotRecursive(nums, target));
     }
 

@@ -21,7 +21,8 @@ public class KthSmallestPairDistance2 {
      *
      * */
 
-
+    // 本题目同 KthSmallestPairDistance
+    // 只是解法稍稍有一点点不一样
 
     public static void main(String[] args) {
 //        int[] nums = {1,6,1};
