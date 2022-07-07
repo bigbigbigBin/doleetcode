@@ -27,7 +27,7 @@ public class DetectCycle {
             if (slow == fast) { // 相等，说明二者相遇，必定存在环
                 intersectionNode = slow;
 
-                // 当他们相遇时，分别从相遇点，头结点开始走，当他们相遇时，就为环的入口。
+                // 当他们相遇时，两个指针，一个从相遇点，一个从头结点开始走，当他们相遇时，就为环的入口。
                 ListNode newHead = head;
                 while (intersectionNode != newHead) {
                     newHead = newHead.next;

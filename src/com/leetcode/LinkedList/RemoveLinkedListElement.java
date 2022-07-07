@@ -17,12 +17,12 @@ public class RemoveLinkedListElement {
         ListNode p = dummyHead; // p 指针
 
         while (p.next != null) {
-            ListNode pre = p;
-            p = p.next;
-            if (p.val == val) {
-                pre.next = p.next;
-                p.next = null;
-                p = pre;
+            if (p.next.val == val) {
+                ListNode delNode = p.next;
+                p.next = delNode.next;
+                delNode.next = null;
+            } else {
+                p = p.next;
             }
         }
         return dummyHead.next;

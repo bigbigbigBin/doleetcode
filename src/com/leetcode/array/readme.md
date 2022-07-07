@@ -1,5 +1,10 @@
 # 数组的经典题目&解决办法
 
+数组常用的Java API
+System.arraycopy(Object src,  int  srcPos, Object dest, int destPos, int length);
+Arrays.copyOfRange(T[] original, int from, int to);
+
+
 ## 二分法
 在这道题目中我们讲到了**循环不变量**原则，只有在循环中坚持对区间的定义，才能清楚的把握循环中的各种细节。
 

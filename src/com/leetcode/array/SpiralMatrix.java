@@ -19,54 +19,64 @@ public class SpiralMatrix {
      * ]
      */
 
+    /**
+     * 本体不考虑算法，就是单纯模拟。
+     * 但是难点在于：要坚持循环不变量原则。
+     * 抽象题意，就是花四条边，每画一条边都要坚持一致的原则：要么是左闭右开，要么是左开右闭。
+     * 要一直坚持这个原则。
+     * @param n
+     * @return
+     */
     public int[][] generateMatrix(int n) {
-        int k = 1;
-        int maxNum = n*n;
-        int left = 0;
-        int right = n;
-        int top = 0;
-        int bottom = n;
-
         int[][] result = new int[n][n];
+        int count = 1;
 
-        while(k <= maxNum) {
-            int j = left;
-            for (; j < right; j++) {
-                result[top][j] = k++;
-            }
-            if (j == right) {
-                right--;
-            }
+        int startX = 0, startY = 0; // 每一次循环的起始位置
+        int loop = n / 2 ; // 循环几圈
+        int mid = n / 2; // 矩阵中间位置
+        int offset = 1; // 控制每次循环的时候，每条边的长度。
+        int i, j;
 
-            int i = top + 1;
-            for (; i < bottom; i++) {
-                result[i][right] = k++;
-            }
-            if (i == bottom) {
-                bottom--;
-            }
+        while(loop > 0) {
+            i = startX;
+            j = startY;
 
-            int m = right-1;
-            for (; m >=left; m--) {
-                result[bottom][m] = k++;
+            // 从左到右，左闭右开
+            for (j = startY; j < startY + n - offset; j++) {
+                result[startX][j] = count++;
             }
 
-            int z = bottom-1;
-            for (; z > top; z--) {
-                result[z][left] = k++;
+            // 从上到下，依然遵循左闭右开
+            for (i = startX; i < startY + n - offset; i++) {
+                result[i][j] = count++;
             }
-            if (z == top) {
-                top++;
+
+            // 从右到左，依然遵循左闭右开
+            for (; j > startY; j--) {
+                result[i][j] = count++;
             }
-            if (m == left-1) {
-                left++;
+
+            for (; i > startX; i--) {
+                result[i][j] = count++;
             }
+
+            // 走完了完整的一圈，更新新的一圈的开始点
+            startX++;
+            startY++;
+
+            // 更新新的一圈的长度控制器
+            offset += 2;
+
+            loop--;
         }
-//        for (int i = 0; i < n; i++) {
-//            System.out.println(Arrays.toString(result[i]));
-//        }
+        if (n % 2 != 0) {
+            result[mid][mid] = count;
+        }
         return result;
     }
+
+
+
 
     public static void main(String[] args) {
         SpiralMatrix s = new SpiralMatrix();

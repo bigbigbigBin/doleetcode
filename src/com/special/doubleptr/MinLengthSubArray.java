@@ -1,4 +1,4 @@
-package array;
+package special.doubleptr;
 
 public class MinLengthSubArray {
 
@@ -10,28 +10,6 @@ public class MinLengthSubArray {
      * 输出：2
      * 解释：子数组 [4,3] 是该条件下的长度最小的子数组。
      */
-
-
-    // 暴力法，
-    // 时间复杂度为O(n^2)
-    // 空间复杂度O(1)
-    public int minSubArrayLen1(int target, int[] nums) {
-        int minLength = Integer.MAX_VALUE;
-        boolean canSum = false;
-
-        for (int i =0; i < nums.length; i++) {
-            int subArraySum = 0;
-            for (int j = i; j < nums.length; j++) {
-                subArraySum += nums[j];
-                if (subArraySum >= target) {
-                    canSum = true;
-                    minLength = Math.min(minLength, j - i + 1);
-                    break;
-                }
-            }
-        }
-        return canSum ? minLength : 0;
-    }
 
 
     /**
@@ -49,10 +27,9 @@ public class MinLengthSubArray {
         int lIndex = 0, rIndex = 0;
         while (rIndex < nums.length) {
             tempSum += nums[rIndex];
-            System.out.println("lIndex = " + lIndex + ", rIndex = " + rIndex+ "， tempSum = " + tempSum);
             /**
              * 一开始我写不对，因为把窗口左移放入操作，放入了外层的大while，导致while循环中，控制跳出的条件迟迟无法写出
-             * 事实再次证明，while循环只控制一件事情的跳出，多件事情，可以分开去控制
+             * todo 事实再次证明，【while循环只控制一件事情的跳出】，【多件事情，可以分开去控制】
              */
             while(tempSum >= target) {
                 minLength = Math.min(minLength, rIndex - lIndex + 1);
@@ -80,4 +57,26 @@ public class MinLengthSubArray {
         System.out.println(m.minSubArrayLen(target, nums));
     }
 
+
+
+    // 暴力法，
+    // 时间复杂度为O(n^2)
+    // 空间复杂度O(1)
+    public int minSubArrayLen1(int target, int[] nums) {
+        int minLength = Integer.MAX_VALUE;
+        boolean canSum = false;
+
+        for (int i =0; i < nums.length; i++) {
+            int subArraySum = 0;
+            for (int j = i; j < nums.length; j++) {
+                subArraySum += nums[j];
+                if (subArraySum >= target) {
+                    canSum = true;
+                    minLength = Math.min(minLength, j - i + 1);
+                    break;
+                }
+            }
+        }
+        return canSum ? minLength : 0;
+    }
 }

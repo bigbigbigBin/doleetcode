@@ -1,7 +1,6 @@
-package array;
+package special.doubleptr;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class SquaresOfSortedArray {
 
@@ -15,6 +14,46 @@ public class SquaresOfSortedArray {
      * 排序后，数组变为 [0,1,9,16,100]
      *
      */
+
+    /**
+     *  最优解，使用双指针
+     *
+     *  新排好序的数组，最大值必然是原数组最左端元素或者最右端元素，不可能是中间元素。
+     *  此时考虑双指针，i指向原数组起始位置，j指向原数组终止位置。
+     *  newNumMaxIndex 始终指向新数组中最大位置
+     */
+    public int[] sortedSquares3(int[] nums) {
+        int[] newNum = new int[nums.length];
+        int newNumMaxIndex = newNum.length - 1;
+        int i =0, j = nums.length -1;
+
+        while (newNumMaxIndex >= 0) {
+            int leftValue = nums[i] * nums[i];
+            int rightValue = nums[j] * nums[j];
+
+            if (leftValue > rightValue) {
+                newNum[newNumMaxIndex--] = leftValue;
+                i++;
+            } else {
+                newNum[newNumMaxIndex--] = rightValue;
+                j--;
+            }
+        }
+        return newNum;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {-7,-3,2,3,11};
+//        int[] nums = {1};
+//        int [] nums = {-4,-1,0,3,10};
+//        int [] nums = {-5,-3,-2,-1};
+//        int [] nums = {-5,-3,-2,1};
+        SquaresOfSortedArray s = new SquaresOfSortedArray();
+        System.out.println(Arrays.toString(s.sortedSquares3(nums)));
+    }
+
+
+
 
     /**
      * 暴力法：每个数平方，然后排序。
@@ -103,42 +142,5 @@ public class SquaresOfSortedArray {
 
         Arrays.sort(nums);
         return nums;
-    }
-
-    /**
-     *  最优解，使用双指针
-     *
-     *  新排好序的数组，最大值必然是原数组最左端元素或者最右端元素，不可能是中间元素。
-     *  此时考虑双指针，i指向原数组起始位置，j指向原数组终止位置。
-     *  newNumMaxIndex 始终指向新数组中最大位置
-     */
-    public int[] sortedSquares3(int[] nums) {
-        int[] newNum = new int[nums.length];
-        int newNumMaxIndex = newNum.length - 1;
-        int i =0, j = nums.length -1;
-
-        while (newNumMaxIndex >= 0) {
-            int leftValue = nums[i] * nums[i];
-            int rightValue = nums[j] * nums[j];
-
-            if (leftValue > rightValue) {
-                newNum[newNumMaxIndex--] = leftValue;
-                i++;
-            } else {
-                newNum[newNumMaxIndex--] = rightValue;
-                j--;
-            }
-        }
-        return newNum;
-    }
-
-    public static void main(String[] args) {
-        int[] nums = {-7,-3,2,3,11};
-//        int[] nums = {1};
-//        int [] nums = {-4,-1,0,3,10};
-//        int [] nums = {-5,-3,-2,-1};
-//        int [] nums = {-5,-3,-2,1};
-        SquaresOfSortedArray s = new SquaresOfSortedArray();
-        System.out.println(Arrays.toString(s.sortedSquares3(nums)));
     }
 }

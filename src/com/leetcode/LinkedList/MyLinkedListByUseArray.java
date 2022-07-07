@@ -2,7 +2,7 @@ package LinkedList;
 
 import java.util.Arrays;
 
-public class MyLinkedList1 {
+public class MyLinkedListByUseArray {
 
     // 使用数组实现
     /**
@@ -11,7 +11,7 @@ public class MyLinkedList1 {
     public int[] array = new int[16];
     public int size;
 
-    public MyLinkedList1() {
+    public MyLinkedListByUseArray() {
 
     }
 
@@ -66,7 +66,7 @@ public class MyLinkedList1 {
 
     public static void main(String[] args) {
 
-        MyLinkedList1 linkedList = new MyLinkedList1();
+        MyLinkedListByUseArray linkedList = new MyLinkedListByUseArray();
         linkedList.addAtHead(2);
         System.out.println(Arrays.toString(linkedList.array));
         linkedList.addAtIndex(0, 1);

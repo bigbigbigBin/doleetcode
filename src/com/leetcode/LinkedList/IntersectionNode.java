@@ -19,18 +19,18 @@ public class IntersectionNode {
         ListNode pB = headB;
         int totalA = 0;
         int totalB = 0;
-        while(pA != null) {
+        while(pA != null) { // 求链表A的长度
             pA = pA.next;
             totalA++;
         }
-        while(pB != null) {
+        while(pB != null) { // 求链表B的长度
             pB = pB.next;
             totalB++;
         }
 
         pA = headA;
         pB = headB;
-        if (totalA > totalB) {
+        if (totalA > totalB) { // 长度长的先走 长度差步
             int goPaths = totalA - totalB;
             while(goPaths>0) {
                 pA = pA.next;
@@ -44,7 +44,7 @@ public class IntersectionNode {
             }
         }
 
-        while(pA != null) {
+        while(pA != null) {  // A、B 同时开始走，当相同，说明相遇了
             if (pA == pB) {
                 return pA;
             }

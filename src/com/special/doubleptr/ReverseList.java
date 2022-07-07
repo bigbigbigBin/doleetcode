@@ -1,6 +1,4 @@
-package LinkedList;
-
-import java.util.List;
+package special.doubleptr;
 
 public class ReverseList {
 

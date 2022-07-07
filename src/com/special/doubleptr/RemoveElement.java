@@ -1,4 +1,4 @@
-package array;
+package special.doubleptr;
 
 import java.util.Arrays;
 
@@ -16,40 +16,18 @@ public class RemoveElement {
      *
      */
 
-    /**
-     * 暴力求解
-     * 时间复杂度为O(n^2)
-     * 空间复杂度为O(1)
-     */
-    public int removeElement(int[] nums, int val) {
-        int totalValNum = 0;
-        int i = 0;
-        while(i < nums.length - totalValNum) {
-            if (nums[i] == val) {
-                totalValNum++;
-                for (int j = i+1; j < nums.length; j++) {
-                    nums[j-1] = nums[j];
-                }
-            } else {
-                i++;
-            }
-        }
-        return nums.length - totalValNum;
-    }
-
 
     /**
-     *
-     *  没想出来的办法，需要再次记忆
+     * 没想出来的办法，需要再次记忆
      * 双指针；
      * 慢指针递增，每个位置存的必定是 !=val 的值。
-     * 快指针，每次都要走一次，每次用快指针来判断值是否为val，不为val才将其复制给慢指针的为孩子
+     * 快指针，每次都要走一次，每次用快指针来判断值是否为val，不为val才将其复制给慢指针的位置
      *
      */
-    public int removeElement2(int[] nums, int val) {
-
+    public int removeElement(int[] nums, int val) {
+        // 慢指针，只有更新了数据才走
         int slowIndex = 0;
-
+        // 快指针，每次都走
         for (int fastIndex = 0; fastIndex < nums.length; fastIndex++) {
             if (nums[fastIndex] != val) {
                 nums[slowIndex++] = nums[fastIndex];
@@ -72,8 +50,29 @@ public class RemoveElement {
 
         RemoveElement removeElement = new RemoveElement();
 
-        System.out.println(removeElement.removeElement2(nums, val));
+        System.out.println(removeElement.removeElement(nums, val));
         System.out.println(Arrays.toString(nums));
 
+    }
+
+    /**
+     * 暴力求解
+     * 时间复杂度为O(n^2)
+     * 空间复杂度为O(1)
+     */
+    public int removeElement2(int[] nums, int val) {
+        int totalValNum = 0;
+        int i = 0;
+        while(i < nums.length - totalValNum) {
+            if (nums[i] == val) {
+                totalValNum++;
+                for (int j = i+1; j < nums.length; j++) {
+                    nums[j-1] = nums[j];
+                }
+            } else {
+                i++;
+            }
+        }
+        return nums.length - totalValNum;
     }
 }
