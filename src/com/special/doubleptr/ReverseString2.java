@@ -1,7 +1,4 @@
-package string;
-
-import java.util.Collection;
-import java.util.Collections;
+package special.doubleptr;
 
 public class ReverseString2 {
 
@@ -20,12 +17,54 @@ public class ReverseString2 {
      */
 
 
+    /**
+     * 其实在遍历字符串的过程中，只要让 i += (2 * k)，i 每次移动 2 * k 就可以了
+     * 因为要找的也就是每2 * k 区间的起点，这样写，程序会高效很多。
+     * 所以当需要固定规律一段一段去处理字符串的时候，要想想在在for循环的表达式上做做文章。
+     *
+     * 双指针提现在swap函数上
+     */
+    public String reverseStr(String s, int k) {
+        char[] array = s.toCharArray();
+        int i = 0;
+        for ( ; i < array.length; i = i + 2*k) {
+            if (i + k <= array.length) {
+                swap(array, i, i+k - 1);
+            } else {
+                swap(array, i, array.length - 1);
+            }
+        }
+        return String.valueOf(array);
+    }
 
+    /**
+     * 双指针交换
+     */
+    private void swap(char[] array, int start, int end) {
+        for (int i = start, j = end; i < j; i++, j--) {
+            char temp = array[j];
+            array[j] = array[i];
+            array[i] = temp;
+        }
+    }
 
+    public static void main(String[] args) {
+//        String s = "abcdefghijk";
+//        int k = 3;
+//        String s = "a";
+//        int k = 2;
+//        String s = "abcdefg";
+//        int k = 2;
+        String s = "abcd";
+        int k = 4;
+        ReverseString2 rr = new ReverseString2();
+        System.out.println("s1 = " + rr.reverseStr(s, k));
+        System.out.println("s2 = " + rr.reverseStr2(s, k));
+    }
 
 
     // 全程模拟题目的规律，方法不简练，
-    public String reverseStr(String s, int k) {
+    public String reverseStr2(String s, int k) {
         int count = 0;
         char[] array = s.toCharArray();
 
@@ -56,42 +95,5 @@ public class ReverseString2 {
             }
         }
         return String.valueOf(array);
-    }
-
-
-    public String reverseStr2(String s, int k) {
-        char[] array = s.toCharArray();
-        int i = 0;
-        for ( ; i < array.length; i = i + 2*k) {
-            if (i + k <= array.length) {
-                swap(array, i, i+k - 1);
-            } else {
-                swap(array, i, array.length - 1);
-            }
-        }
-        return String.valueOf(array);
-    }
-
-    private void swap(char[] array, int start, int end) {
-        for (int i = start, j = end; i < j; i++, j--) {
-            char temp = array[j];
-            array[j] = array[i];
-            array[i] = temp;
-        }
-    }
-
-    public static void main(String[] args) {
-//        String s = "abcdefghijk";
-//        int k = 3;
-//        String s = "a";
-//        int k = 2;
-//        String s = "abcdefg";
-//        int k = 2;
-        String s = "abcd";
-        int k = 4;
-        ReverseString2 rr = new ReverseString2();
-        System.out.println("s1 = " + rr.reverseStr(s, k));
-        System.out.println("s2 = " + rr.reverseStr2(s, k));
-
     }
 }

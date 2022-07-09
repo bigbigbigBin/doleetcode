@@ -1,4 +1,4 @@
-package string;
+package special.doubleptr;
 
 import java.util.Arrays;
 
@@ -16,11 +16,16 @@ public class ReverseString {
      * 示例 2：输入：["H","a","n","n","a","h"] 输出：["h","a","n","n","a","H"]
      */
 
+    // 可以换种思路，直接双指针。
     public void reverseString(char[] s) {
-        for (int i = 0; i < s.length / 2; i++) {
-            char temp = s[i];
-            s[i] = s[s.length - 1 - i];
-            s[s.length - 1 - i] = temp;
+        int left = 0;
+        int right = s.length - 1;
+        while (left < right) {
+            char tempChar = s[left];
+            s[left] = s[right];
+            s[right] = tempChar;
+            left++;
+            right--;
         }
     }
 
