@@ -1,4 +1,4 @@
-package stackQueue;
+package special.stack_queue;
 
 import java.util.*;
 
@@ -18,6 +18,9 @@ public class SlidingWindowMaxNum {
     class MyQueue {
         Deque<Integer> deque = new LinkedList<>();
 
+        // 队列头存的是最大的数据，且队列中存的是这个区间内从最大值开始，单调递减的数
+        // 出数据的时候，如果窗口内的第一个数，不是最大值，那就不必操作出栈。
+        // 因为队列中没有，就不必存
         public int poll(int val) {
             if (!deque.isEmpty() && deque.peek() == val) {
                 return deque.poll();
@@ -61,16 +64,16 @@ public class SlidingWindowMaxNum {
         return result;
     }
 
-    // 暴力法，每次求解出滑动窗口（用的队列实现）内的最大值
-    // 时间复杂度O(n*k)
-    private int findMax(Queue<Integer> queue) {
-        int max = Integer.MIN_VALUE;
-        Iterator<Integer> it = queue.iterator();
-        while (it.hasNext()){
-            max = Math.max(max, it.next());
-        }
-        return max;
-    }
+//    // 暴力法，每次求解出滑动窗口（用的队列实现）内的最大值
+//    // 时间复杂度O(n*k)
+//    private int findMax(Queue<Integer> queue) {
+//        int max = Integer.MIN_VALUE;
+//        Iterator<Integer> it = queue.iterator();
+//        while (it.hasNext()){
+//            max = Math.max(max, it.next());
+//        }
+//        return max;
+//    }
 
     public static void main(String[] args) {
         int[] nums = {1,3,-1,-3,5,3,6,7};
