@@ -1,4 +1,4 @@
-package hashtable;
+package special.hashtable;
 
 import java.util.HashMap;
 
@@ -25,7 +25,8 @@ public class FourSumCount {
      * (1, 1, 0, 0) -> A[1] + B[1] + C[0] + D[0] = 2 + (-1) + (-1) + 0 = 0
      */
 
-    // 暴力法，时间复杂度太高了，想办法降低时间复杂度
+    // 不能使用暴力法O(n^4)时间复杂度太高了，必须想办法降低时间复杂度
+    // 思路：
     // O(n^2) 把前两个数据的和保存起来
     // O(n^2) 判断后两个数组，找到 0 - 自身的俩数组的和 在数组中存在
     // 最终的时间复杂度为 O(n^2)
@@ -36,13 +37,7 @@ public class FourSumCount {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 int temp = nums1[i] + nums2[j];
-                if (dataMap.containsKey(temp)) {
-                    int oldCount = dataMap.get(temp);
-                    oldCount += 1;
-                    dataMap.put(temp, oldCount);
-                } else {
-                    dataMap.put(temp, 1);
-                }
+                dataMap.put(temp, dataMap.getOrDefault(temp, 0) + 1);
             }
         }
 

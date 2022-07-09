@@ -1,6 +1,4 @@
-package hashtable;
-
-import java.util.HashMap;
+package special.hashtable;
 
 public class RansomNote {
 

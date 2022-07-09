@@ -1,7 +1,6 @@
-package hashtable;
+package special.hashtable;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 public class IntersectionElementOfArray {
     /**

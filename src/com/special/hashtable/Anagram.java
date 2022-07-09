@@ -1,7 +1,4 @@
-package hashtable;
-
-import java.util.HashMap;
-import java.util.Map;
+package special.hashtable;
 
 public class Anagram {
 
