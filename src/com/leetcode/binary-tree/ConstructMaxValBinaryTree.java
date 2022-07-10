@@ -13,39 +13,47 @@ public class ConstructMaxValBinaryTree {
      *
      */
 
-    public TreeNode constructMaximumBinaryTree(int[] nums) {
-        if (nums.length == 0) {
+    public TreeNode constructMaximumBinaryTree2(int[] nums) {
+        return constructMaximumBinaryTree(nums, 0, nums.length);
+    }
+
+    private TreeNode constructMaximumBinaryTree(int[] nums, int start, int end) {
+        // 第一步：递归终止条件
+        if (start >= end) {
             return null;
         }
 
-        // 找出最大值、最大值的下标
-        int rootIndex = 0;
-        int rootVal = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            if (nums[i] > rootVal) {
-                rootIndex = i;
-                rootVal = nums[i];
-            }
-        }
-        // 构建出根节点
-        TreeNode root = new TreeNode(rootVal);             // 根节点
+        // 第二步： 找出最大值以及下标
+        int[] maxValInd = findMaxNum(nums, start, end);
+        TreeNode root = new TreeNode(maxValInd[0]);
 
-        // 切分出来左子树的数组、右子树的数组
-        int[] leftNums = Arrays.copyOfRange(nums, 0, rootIndex);
-        int[] rightNums = Arrays.copyOfRange(nums, rootIndex + 1, nums.length);
+        // 第三步：切割数组   不使用copy函数了，直接借用递归函数+下标来处理子数组
 
-        root.left = constructMaximumBinaryTree(leftNums);  // 左节点
-        root.right = constructMaximumBinaryTree(rightNums);// 右节点
+        // 第四步：递归左右子树
+        root.left = constructMaximumBinaryTree(nums, start, maxValInd[1]);
+        root.right = constructMaximumBinaryTree(nums, maxValInd[1] + 1, end);
         return root;
     }
-    // 看右边的注解，发现实际上，是前序遍历  跟 -> 左 -> 右
-    // 事实上，也应该是前序遍历，因为要先构建出来根节点，然后才能构建左子树、右子树。
 
-    // 另外，递归技巧
-    // 一般情况来说：如果让空节点（空指针）进入递归，就不加if，
-    //             如果不让空节点进入递归，就加if限制一下， 终止条件也会相应的调整。
-    //     本题目中 root.left = constructMaximumBinaryTree(leftNums);
-    //             说明是允许空节点进入递归，所以终止条件就是if if (nums.length == 0) { return null;}
-    //             如果不允许空节点进入，则递归终止条件，相应的要改为当遇到叶子节点时退出。
+    /**
+     * 找出最大值 & 最大值的下标
+     */
+    private int[] findMaxNum(int[] nums, int start, int end) {
+        int maxValue = Integer.MIN_VALUE;
+        int maxIndex = 0;
+        for (int i = start; i < end; i++) {
+            if (nums[i] > maxValue) {
+                maxIndex = i;
+                maxValue = nums[i];
+            }
+        }
+        return new int[] {maxValue, maxIndex};
+    }
 
+    public static void main(String[] args) {
+        int[] nums = {3,2,1,6,0,5};
+        ConstructMaxValBinaryTree cc = new ConstructMaxValBinaryTree();
+        cc.constructMaximumBinaryTree2(nums);
+
+    }
 }

@@ -13,36 +13,37 @@ public class ConstructTreeFromPreOrderAndInOrder {
      * */
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        // 如果前序数组长度为null，说明这个是个空节点
+        // 第一步：递归终止条件：   如果前序数组长度为null，说明这个是个空节点
         if (preorder.length == 0) {
             return null;
         }
 
-        // 找出根节点，在前序数组的第一个位置
+        // 第二步：从前序数组中找出根节点：  找出根节点，在前序数组的第一个位置
         int rootVal = preorder[0];
         TreeNode root = new TreeNode(rootVal);
 
+        // 第三步：用根节点，在中序数组中找到分割点。
         int rootIndex = 0;
         for (; rootIndex < inorder.length; rootIndex++) {
             if (inorder[rootIndex] == rootVal)
                 break;
         }
 
-        System.out.println("rootIndex = " + rootIndex);
+        // System.out.println("rootIndex = " + rootIndex);
 
-        // 找出中序数组，被根节点，切分出来的左右子树，所对应的中序数组
+        // 第四步：用分割点切割中序数组，切分出来左、右子树所对应的中序子数组
         int[] leftInOrder = Arrays.copyOfRange(inorder, 0, rootIndex);
         int[] rightInOrder = Arrays.copyOfRange(inorder, rootIndex+1, inorder.length);
-        System.out.println(Arrays.toString(leftInOrder));
-        System.out.println(Arrays.toString(rightInOrder));
+//        System.out.println(Arrays.toString(leftInOrder));
+//        System.out.println(Arrays.toString(rightInOrder));
 
-
+        // 第五步：借助左、右中序子数组的长度，切分出来左、右子树所对应的前序子数组
         int[] leftPreOrder = Arrays.copyOfRange(preorder, 1, 1 + leftInOrder.length);
         int[] rightPreOrder = Arrays.copyOfRange(preorder, 1 + leftInOrder.length, preorder.length);
-        System.out.println(Arrays.toString(leftPreOrder));
-        System.out.println(Arrays.toString(rightPreOrder));
+//        System.out.println(Arrays.toString(leftPreOrder));
+//        System.out.println(Arrays.toString(rightPreOrder));
 
-
+        // 第六步：递归构建左右子树
         root.left = buildTree(leftPreOrder, leftInOrder);
         root.right = buildTree(rightPreOrder, rightInOrder);
         return root;

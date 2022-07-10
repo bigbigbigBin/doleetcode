@@ -37,7 +37,7 @@ public class ConstructBinaryTreeOfLevelOrder {
     public static void main(String[] args) throws NoSuchFieldException, InvocationTargetException, InstantiationException, IllegalAccessException {
         SymmetricTree symmetricTree = new SymmetricTree();
         Integer[] array = {1, 2, null};
-        SymmetricTree.TreeNode root = ConstructBinaryTreeOfLevelOrder.constructTree(array, SymmetricTree.TreeNode.class);
+        TreeNode root = ConstructBinaryTreeOfLevelOrder.constructTree(array, TreeNode.class);
         System.out.println(root);
         System.out.println(root.left);
         System.out.println(root.right);
