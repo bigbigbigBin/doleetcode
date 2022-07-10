@@ -21,11 +21,13 @@ public class NQueens {
      *
      * 输入：n = 1
      * 输出：[["Q"]]
+     *
+     * PS : N皇后，指的是皇后们，不可同行、不可同列、不可同斜线。
      */
 
 
     // 回溯问题，转化为树问题。
-    // 树的深度，就是棋盘的高，树的宽度，就是树的宽度
+    // 棋盘的高，就是树的深度，棋盘的宽度，就是每一个节点的子树的宽度。
     public List<List<String>> solveNQueens(int n) {
         String[][] base = new String[n][n];
         backTracing(base, n, 0);
@@ -37,15 +39,7 @@ public class NQueens {
     public void backTracing(String[][] base, int n, int row) {
         // 到达叶子节点， 不满足放置条件的，row不会加一，所以无法到达深度为n
         if (n == row) {
-            List<String> oneResult =  new ArrayList<>();
-            for (int i = 0; i < base.length; i++) {
-                StringBuilder sb = new StringBuilder();
-                for (int j = 0; j < base[0].length; j++) {
-                    sb.append(base[i][j] == null ? "." : base[i][j]);
-                }
-                oneResult.add(sb.toString());
-            }
-            result.add(oneResult);
+            result.add(processResult(base));
             return;
         }
 
@@ -97,6 +91,21 @@ public class NQueens {
                 return false;
         }
         return true;
+    }
+
+    /**
+    * 将棋盘中的null，处理成.   以便满足展示结果
+    */
+    private List<String> processResult(String[][] base) {
+        List<String> oneResult =  new ArrayList<>();
+        for (int i = 0; i < base.length; i++) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < base[0].length; j++) {
+                sb.append(base[i][j] == null ? "." : base[i][j]);
+            }
+            oneResult.add(sb.toString());
+        }
+        return oneResult;
     }
 
     public static void main(String[] args) {

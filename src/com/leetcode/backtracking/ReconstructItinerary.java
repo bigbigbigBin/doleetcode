@@ -25,6 +25,10 @@ public class ReconstructItinerary {
      * 解释：另一种有效的行程是 ["JFK","SFO","ATL","JFK","ATL","SFO"]。但是它自然排序更大更靠后。
      */
 
+    List<String> result = new ArrayList<>();
+    Map<String, TreeMap<String, Integer>> map = new HashMap<>();
+
+
     public List<String> findItinerary(List<List<String>> tickets) {
 
         // 先初始化图
@@ -48,8 +52,7 @@ public class ReconstructItinerary {
         return result;
     }
 
-    List<String> result = new ArrayList<>();
-    Map<String, TreeMap<String, Integer>> map = new HashMap<>();
+
 
 
     public boolean traversal(List<List<String>> tickets) {
