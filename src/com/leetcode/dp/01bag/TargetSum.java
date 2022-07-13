@@ -5,7 +5,7 @@ public class TargetSum {
     // 那么此题目，转化为，从数组nums中，找出来和为A的种类
     //
     // dp[i][j] 表示从[0,...i]数字中，找出数字和为j的组合数
-    // dp[i][j] = dp[i-1][j] + dp[i-1][j-nums[i]] + nums[i]
+    // dp[i][j] = dp[i-1][j] + dp[i-1][j-nums[i]]
     // 初始化： dp[0][0]  = 1 ，即，从0个数字中选择数字和为0，那么只有一种选法，即什么都不选
 
     public int findTargetSumWays(int[] nums, int target) {
@@ -39,5 +39,30 @@ public class TargetSum {
             }
         }
         return dp[nums.length][left];
+    }
+
+    public int findTargetSumWays2(int[] nums, int target) {
+
+        int sum = 0;
+        for (int nm : nums) {
+            sum += nm;
+        }
+        // +号的数字组成的数字之和 = A ；  -号数字组成的和为B
+        // A + B = sum   A - B = target
+        // 整理公式则  A = (sum + target) / 2;
+        int bagWeight = (sum + target) / 2;
+
+        // dp[j] 表示找出数字和为j，共有多少种方案
+        // 填满容量为j - nums[i]的背包，有dp[j - nums[i]]种方法。
+        // 此题求得是组合数，并不是求价值或者重量，所以递归公式中，不加上数字价值
+        int[] dp = new int[bagWeight + 1];
+
+        dp[0] = 1;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = bagWeight; j >= nums[i]; j--) {
+                dp[j] = dp[j] + dp[j-nums[i]];
+            }
+        }
+        return dp[bagWeight];
     }
 }

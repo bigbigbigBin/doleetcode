@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class CoinChange2 {
 
+    // 我们知道01背包内嵌的循环是从大到小遍历，为了保证每个物品仅被添加一次。
+    // 而完全背包的物品是可以添加多次的，所以要从小到大去遍历.
 
     public int change(int amount, int[] coins) {
         // dp[i] 表示凑成总金额为i时，可能的硬币组合数

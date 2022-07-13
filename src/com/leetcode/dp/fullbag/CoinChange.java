@@ -38,7 +38,7 @@ public class CoinChange {
         // 完全背包，每次可以取0次或者无数次
         // dp[i]表示凑成金额i，需要的最少硬币个数
         // dp[i] = math.min(dp[i], dp[i - coins[j]] + 1)
-        // dp[0] = 0;
+        // dp[0] = 0; dp[i] 初始为MAX_INTEGER
         // 求的是个数，顺序就无所谓了
         if (amount == 0) {
             return 0;

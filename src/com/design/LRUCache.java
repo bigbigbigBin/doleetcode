@@ -25,14 +25,14 @@ public class LRUCache {
         }
     }
 
-    // 存放
+    // 用于快速判断，缓存中是否存在某个数据
     HashMap<String, ListNode> dataMap = new HashMap<>(16);
     // 缓存总大小
     int maxCount;
     // 已使用的大小
     volatile int curCount = 0;
 
-    private ListNode head, tail;
+    private ListNode head, tail; // 存放缓存的内容
 
     public LRUCache(int maxCount) {
         this.maxCount = maxCount;

@@ -34,7 +34,10 @@ public class ClimbingStairsWithMinCost {
      */
 
     // 题目有个提醒【在开始时，你可以选择从下标为 0 或 1 的元素作为初始阶梯。】这个话，能够解答一开始的疑问，为什么能跨过第一个花费，直接选第二个花费
-    // dp[i] 表示爬上第i个阶梯，需要支付的总费用
+    // dp[i] 表示爬上第i个阶梯，需要支付的最小总费用
+    // 由于可以选择下标 0 或 1 作为初始阶梯，因此有 dp[0]=dp[1]=0。
+    // 当 2≤i≤n 时，可以从下标 i−1 使用cost[i−1] 的花费达到下标 i，或者从下标 i-2 使用cost[i−2] 的花费达到下标 i。
+    // 为了使总花费最小，dp[i] 应取上述两项的最小值，因此
     // dp[i] = min(dp[i-1] + cost[i-1], dp[i-2] + cost[i-2])
     public int minCostClimbingStairs(int[] cost) {
         int[] dp = new int[cost.length + 1];

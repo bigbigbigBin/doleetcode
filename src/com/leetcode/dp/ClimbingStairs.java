@@ -46,7 +46,28 @@ public class ClimbingStairs {
         return array[n];
     }
 
-    public static void main(String[] args) {
+    /**
+     * 本质是只依赖于前两个数，所以使用大小为2的数组，能够节省资源
+     */
+    public int climbStairs2(int n) {
+        if (n < 2) {
+            return 1;
+        }
 
+        int[] array = new int[2];
+        array[0] = 1;
+        array[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            int sum = array[0] + array[1];
+            array[0] = array[1];
+            array[1] = sum;
+        }
+        return array[1];
+    }
+
+    public static void main(String[] args) {
+        ClimbingStairs cs = new ClimbingStairs();
+        System.out.println(cs.climbStairs(10));
+        System.out.println(cs.climbStairs2(10));
     }
 }

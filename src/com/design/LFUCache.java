@@ -89,7 +89,7 @@ public class LFUCache {
         }
 
         if (freqToKeys.get(freq).isEmpty()) {
-            // 说明就这个一个key的访问次数为freq
+            // 说明就这一个key的访问次数为freq
             freqToKeys.remove(freq);
             if (freq == minFreq) {
                 minFreq += 1;
