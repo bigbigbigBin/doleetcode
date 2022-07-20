@@ -1,7 +1,4 @@
-package dp;
-
-import java.util.Arrays;
-import java.util.Collections;
+package com.leetcode.dp.sub_array_sequence;
 
 public class MaxSumOfSubArray {
 
@@ -26,37 +23,35 @@ public class MaxSumOfSubArray {
      *
      * 示例3
      *  输入：[-10]
-     *  输出: 10
+     *  输出: -10
+     */
+
+
+    /**
+     * 动态规划实现
+     * 空间复杂度为O(n), 使用了一个额外的数组dp
+     * 时间复杂度为O(n), 算法速度随着数组的大小N而线性变化
      */
     public int FindGreatestSumOfSubArray(int[] array) {
         if (array == null || array.length == 0) {
             return 0;
         }
 
-        if (array.length == 1) {
-            return array[0];
-        }
-        /**
-         * 本实现，
-         * 空间复杂度为O(n), 使用了一个额外的数组dp
-         * 时间复杂度为O(n), 算法速度随着数组的大小N而线性变化
-         */
         int []dp = new int[array.length];
         dp[0] = array[0];
         int maxSum = dp[0];
         for (int i = 1; i < array.length; i++) {
-            if (dp[i-1] > 0) {
-                dp[i] = dp[i-1] + array[i];
-            } else {
-                dp[i] = array[i];
-            }
-            if (maxSum < dp[i]) {
-                maxSum = dp[i];
-            }
+            dp[i] = Math.max(dp[i-1] + array[i], array[i]);
+            maxSum = Math.max(dp[i], maxSum);
         }
         return maxSum;
     }
 
+
+    /**
+     * 时间复杂度O(n)
+     * 空间复杂度为O(1)
+     */
     public int FindGreatestSumOfSubArray2(int[] array) {
         if (array == null || array.length == 0) {
             return 0;
@@ -64,9 +59,7 @@ public class MaxSumOfSubArray {
         if (array.length == 1) {
             return array[0];
         }
-        /**
-         * 时间复杂度为O（1）
-         */
+
         int currentSubArraySum = array[0];
         int maxSum = array[0];
         for (int i = 1; i < array.length; i++) {

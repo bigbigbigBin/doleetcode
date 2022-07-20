@@ -1,4 +1,4 @@
-package dp.fullbag;
+package com.leetcode.dp.fullbag;
 
 import java.util.Arrays;
 

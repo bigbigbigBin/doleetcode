@@ -1,4 +1,4 @@
-package dp.house_robber;
+package com.leetcode.dp.house_robber;
 
 import com.leetcode.binary_tree.TreeNode;
 
