@@ -1,3 +1,5 @@
+package com.leetcode.greedy_algorithm;
+
 import java.util.Arrays;
 
 public class NonOverlappingIntervals {
@@ -32,7 +34,7 @@ public class NonOverlappingIntervals {
 
         int count = 0;
         for (int i =1; i < intervals.length; i++) {
-            // 如果有重叠，要保留起始位置更小的那个元素
+            // 如果有重叠，要保留结束位置更小的那个元素
             if (intervals[i][0] < intervals[i-1][1]) { // 说明有重叠
                 intervals[i][1] = Math.min(intervals[i][1], intervals[i-1][1]);
                 count++;
@@ -43,7 +45,7 @@ public class NonOverlappingIntervals {
 
     public int eraseOverlapIntervals2(int[][] intervals) {
         // 按照右边界升序排列
-        Arrays.sort(intervals, (o1, o2) -> { return o1[1] < o2[1] ? -1 : (o1[1] == o2[1]) ? 0: 1; });
+        Arrays.sort(intervals, (o1, o2) -> o1[1] - o2[1]);
 
         // 直接求重复的区间是复杂的，转而求最大非重复区间个数。
 

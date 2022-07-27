@@ -1,3 +1,5 @@
+package com.leetcode.greedy_algorithm;
+
 public class AssignCandy {
     /**
      * 力扣题目链接：https://leetcode-cn.com/problems/candy
@@ -22,8 +24,13 @@ public class AssignCandy {
      * 解释: 你可以分别给这三个孩子分发 1、2、1 颗糖果。第三个孩子只得到 1 颗糖果，这已满足上述两个条件。
      */
 
+    //那么本题我采用了两次贪心的策略：
+    //一次是从左到右遍历，只比较右边孩子评分比左边大的情况。
+    //一次是从右到左遍历，只比较左边孩子评分比右边大的情况。
+    //这样从局部最优推出了全局最优，即：相邻的孩子中，评分高的孩子获得更多的糖果。
+
     // 不能排序，因为原题目对相邻位置的俩元素有分配要求
-    // 不能一起考虑，分开考虑
+    // 不能一起考虑，分开考虑：一定是要确定一边之后，再确定另一边，例如比较每一个孩子的左边，然后再比较右边，如果两边一起考虑一定会顾此失彼。
     public int candy(int[] ratings) {
         int[] candyNum = new int[ratings.length];
         candyNum[0] = 1;

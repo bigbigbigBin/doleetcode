@@ -1,3 +1,5 @@
+package com.leetcode.greedy_algorithm;
+
 import java.util.Arrays;
 
 public class AssignCookies {
@@ -25,42 +27,10 @@ public class AssignCookies {
      */
 
 
-    // 贪心
+    // 更加优化：只需单层循环
     // 思想就是，大饼干尽量喂给胃口大的孩子，这样充分利用饼干尺寸
-    // 本体双层循环，效率不好，看下面的继续改进
+    // 或者，也可以小饼干喂给胃口小的孩子
     public int findContentChildren(int[] g, int[] s) {
-        int count = 0;
-
-        for (int i = 0; i < g.length; i++) {
-            int minIndex = -1;
-            int minValue = -1;
-            for (int j = 0; j < s.length; j++) {
-                if (s[j] == g[i]) {
-                    minIndex = j;
-                    break;
-                }
-                if (s[j] > g[i]) {
-                    if (minIndex == -1) {
-                        minIndex = j;
-                        minValue = s[j];
-                    } else if (minValue > s[j]) {
-                        minIndex = j;
-                        minValue = s[j];
-                    }
-                }
-            }
-            if (minIndex != -1) {
-                count++;
-                s[minIndex] = 0;
-            }
-        }
-        return count;
-    }
-
-
-    // 更加优化
-    //
-    public int findContentChildren2(int[] g, int[] s) {
         int count = 0;
         Arrays.sort(g);
         Arrays.sort(s);
@@ -84,4 +54,35 @@ public class AssignCookies {
     }
 
 
+    // 贪心
+    // 思想就是，大饼干尽量喂给胃口大的孩子，这样充分利用饼干尺寸
+    // 本体双层循环，效率不好，继续改进，就是只是用一个for循环
+//    public int findContentChildren(int[] g, int[] s) {
+//        int count = 0;
+//
+//        for (int i = 0; i < g.length; i++) {
+//            int minIndex = -1;
+//            int minValue = -1;
+//            for (int j = 0; j < s.length; j++) {
+//                if (s[j] == g[i]) {
+//                    minIndex = j;
+//                    break;
+//                }
+//                if (s[j] > g[i]) {
+//                    if (minIndex == -1) {
+//                        minIndex = j;
+//                        minValue = s[j];
+//                    } else if (minValue > s[j]) {
+//                        minIndex = j;
+//                        minValue = s[j];
+//                    }
+//                }
+//            }
+//            if (minIndex != -1) {
+//                count++;
+//                s[minIndex] = 0;
+//            }
+//        }
+//        return count;
+//    }
 }

@@ -1,3 +1,5 @@
+package com.leetcode.greedy_algorithm;
+
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -48,6 +50,12 @@ public class LemonadeChange {
      * bills[i] 不是 5 就是 10 或是 20
      */
 
+    /**
+     * 情况一：账单是5，直接收下。
+     * 情况二：账单是10，消耗一个5，增加一个10
+     * 情况三：账单是20，优先消耗一个10和一个5，如果不够，再消耗三个5
+     *       所以局部最优：遇到账单20，优先消耗美元10，完成本次找零。全局最优：完成全部账单的找零。
+     */
     public boolean lemonadeChange(int[] bills) {
         int bill5 = 0;
         int bill10 = 0;
@@ -56,24 +64,20 @@ public class LemonadeChange {
             if (bills[i] == 5) {
                 bill5++;
             } else if (bills[i] == 10) {
-                bill10++;
-                if (bill5 > 0) {
-                    bill5--; // 找零5元
-                } else {
+                if (bill5 <= 0) {
                     return false;
                 }
+                bill10++;
+                bill5--; // 找零5元
             } else {
-                bill20++;
-                int temp = bills[i] -5;
-                while (temp > 10 && bill10 > 0) {
-                    temp = temp - 10;
-                    bill10--; // 找零10元
-                }
-                while (temp > 0  && bill5 > 0) {
-                    temp = temp - 5;
+                if (bill5 > 0 && bill10 > 0) {
                     bill5--;
-                }
-                if (temp > 0) {
+                    bill10--;
+                    bill20++;
+                } else if (bill5 > 3) {
+                    bill5 -= 3;
+                    bill20++;
+                } else {
                     return false;
                 }
             }

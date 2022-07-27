@@ -42,7 +42,7 @@ public class BestTimeToBuySellStock2 {
 
     // 2、这正是因为本题的股票可以买卖多次！
     //      所以买入股票的时候，可能会有之前买卖的利润即：dp[i - 1][1]，
-    //      所以dp[i - 1][1] - prices[i]。
+    //      所以本次买入股票会有：dp[i - 1][1] - prices[i]。
     // dp[i][0] = max(dp[i-1][0], dp[i-1][1] - prices[i]) 前一天就持有了股票；或者前一天没有持有，今天开始买入
     // dp[i][1] = max(dp[i-1][1], dp[i-1][0] + prices[i]) 前一天不持有股票； 前一天持有股票然后今天卖掉
 

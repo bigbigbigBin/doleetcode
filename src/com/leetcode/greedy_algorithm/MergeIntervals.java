@@ -1,3 +1,5 @@
+package com.leetcode.greedy_algorithm;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,36 +31,23 @@ public class MergeIntervals {
         if (intervals.length <= 1) {
             return intervals;
         }
-        // 首先排序，按照首字母排序，然后重叠区间时，尽可能选择最远的右节点，将之合并
-        Arrays.sort(intervals, (o1, o2) -> o1[0] < o2[0] ? -1 : o1[0] == o2[0] ? 0 : 1);
+        // 首先排序，按照左边界升序排序，然后重叠区间时，尽可能选择最远的右节点，将之合并
+        Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]);
 
         List<int[]> res = new ArrayList<>();
         int start = intervals[0][0];
         int end = intervals[0][1];
         for (int i = 1; i < intervals.length; i++) {
             if (intervals[i][0] <= end) { // 说明有重叠部分
-                end = Math.max(intervals[i][1], end);
-            } else {
-                int [] temp = new int[2];
-                temp[0] = start;
-                temp[1] = end;
-                res.add(temp);
+                intervals[i][1] = Math.max(intervals[i][1], intervals[i-1][1]);
+            } else { // 没有重复部分
+                res.add(new int[] {start, intervals[i][1]});
                 start = intervals[i][0];
-                end = intervals[i][1];
             }
         }
-        if (res.size() == 0 || start != res.get(res.size()-1)[0]) {
-            int [] temp = new int[2];
-            temp[0] = start;
-            temp[1] = end;
-            res.add(temp);
-        }
+        res.add(new int[]{start, intervals[intervals.length - 1][1]});
 
-        int[][] finalArray = new int[res.size()][2];
-        for (int i = 0; i < res.size(); i++) {
-            finalArray[i] = res.get(i);
-        }
-        return finalArray;
+        return res.toArray(new int[res.size()][2]);
     }
 
     public static void main(String[] args) {

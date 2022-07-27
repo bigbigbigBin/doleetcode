@@ -1,3 +1,5 @@
+package com.leetcode.greedy_algorithm;
+
 public class WiggleSubsequence {
     /**
      * 力扣题目链接：https://leetcode-cn.com/problems/wiggle-subsequence
@@ -10,6 +12,9 @@ public class WiggleSubsequence {
      *
      * 给定一个整数序列，返回作为摆动序列的最长子序列的长度。
      * 通过从原始序列中删除一些（也可以不删除）元素来获得子序列，剩下的元素保持其原始顺序。
+     *
+     * 给你一个整数数组 nums ，返回 nums 中作为 摆动序列 的 【最长子序列的长度】。
+     *
      *
      * 示例 1:
      * 输入: [1,7,4,9,2,5]

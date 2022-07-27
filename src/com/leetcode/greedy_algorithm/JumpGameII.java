@@ -1,3 +1,5 @@
+package com.leetcode.greedy_algorithm;
+
 public class JumpGameII {
     /**
      * 力扣题目链接 https://leetcode-cn.com/problems/jump-game-ii/
@@ -15,6 +17,11 @@ public class JumpGameII {
      * 说明: 假设你总是可以到达数组的最后一个位置。
      */
 
+    /**
+     * 解题的时候，要从覆盖范围出发，不管怎么跳，覆盖范围内一定是可以跳到的，以最小的步数增加覆盖范围，
+     * 覆盖范围一旦覆盖了终点，得到的就是最小步数！
+     * 这里需要统计两个覆盖范围，当前这一步的最大覆盖和下一步最大覆盖。
+     */
     public int jump(int[] nums) {
         if (nums.length == 1) {
             return 0;

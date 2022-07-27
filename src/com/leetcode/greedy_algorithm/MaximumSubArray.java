@@ -1,3 +1,5 @@
+package com.leetcode.greedy_algorithm;
+
 public class MaximumSubArray {
     /**
      * 力扣题目链接：https://leetcode-cn.com/problems/maximum-subarray
